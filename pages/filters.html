@@ -10,9 +10,7 @@
     <body>
       <div class="header">
         <h1><u>Photo Filters</u></h1>
-        <p>This website will include useful tools, such as ...</p>
-        <p>For more details, please check our <a href="https://github.com/Rdhirschel/UsefulTools" target="_blank">project page</a> over on GitHub.</p>
-        <p>You can also check our GitHub pages: <a href="https://github.com/Rdhirschel" target="_blank" rel="Author">Rdhirschel</a>, <a href="https://github.com/etetetN" target="_blank" rel="Author">etetetN</a>.</p>
+        <p>Apply various effects to your photo (experimental)</p>
       </div>
 
       <div class="sidenav">
@@ -20,5 +18,25 @@
         <a href="example2.html">Example 2</a>
         <a href="example3.html">Example 3</a>
       </div>
+
+      <div class="card">
+        <!-- <div class="card-body">
+          This is some text within a card body.
+        </div> -->
+        <img src = "/images/1.png" id="uploaded-image">
+        <div>
+          <label for="input-file">Upload Image</label>
+        </div>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+      </div>
+
+      <script> 
+        let setPic = document.getElementById("uploaded-image");
+        let inputPic = document.getElementById("input-file");
+
+        inputPic.onchange = function(){
+          setPic.src = URL.createObjectURL(inputPic.files[0]);
+        }
+      </script>
     </body>
 </html>
