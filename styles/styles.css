@@ -7,16 +7,23 @@
 
 .header{
     text-align: center;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 body {
     height: 100vh;
     background-color: rgb(184, 173, 173);
 }
-
+a:hover{
+    transition: 0.5s;
+    color: rgb(146, 92, 92);
+}
+a:visited 
+{
+    color: blue;
+}
 .sidenav {
-    width: 150px;
+    width: 20%;
     position: fixed;
     z-index: 1;
     top: 0;
