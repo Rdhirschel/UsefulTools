@@ -14,15 +14,12 @@
       </div>
 
       <div class="sidenav">
-        <a href="/pages/filters.html">Photo Filters</a>
-        <a href="example2.html">Example 2</a>
+        <a href="../index.html">Home Page</a>
+        <a href="../pages/url.html">URL Shortener</a>
         <a href="example3.html">Example 3</a>
       </div>
 
       <div class="card">
-        <!-- <div class="card-body">
-          This is some text within a card body.
-        </div> -->
         <img src = "/images/1.png" id="uploaded-image">
         <div>
           <label for="input-file">Upload Image</label>
@@ -30,13 +27,6 @@
         <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
       </div>
 
-      <script> 
-        let setPic = document.getElementById("uploaded-image");
-        let inputPic = document.getElementById("input-file");
-
-        inputPic.onchange = function(){
-          setPic.src = URL.createObjectURL(inputPic.files[0]);
-        }
-      </script>
+      <script src="../scripts/filters.js"></script>
     </body>
 </html>
