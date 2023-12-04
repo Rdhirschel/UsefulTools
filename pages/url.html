@@ -18,9 +18,24 @@
         <h1>URL Shortener</h1>
         <input type="text" id="url-input" placeholder="Enter your URL here">
         <input type="text" id="name-input" placeholder="Enter an optional name">
-        <button onclick=generateShortURL()>Shorten URL</button>
+        <button onclick="shortenURL()">Shorten URL</button>
         <p id="result"></p>
     </div>
-    <script src="../scripts/url.js"></script>
+    <script>
+    function shortenURL() {
+        const url = document.getElementById('url-input').value;
+        fetch('http://localhost:3000/shorten', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('result').textContent = 'Your short URL is: http://localhost:3000/' + data.id;
+        });
+    }
+    </script>
 </body>
 </html>
