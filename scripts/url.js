@@ -44,12 +44,30 @@ function createHtmlPage(url, linkName)
     fs.writeFileSync(filePath, html);
 }
 
-function shortenURL() {
+function urlExists(url) 
+{
+    try 
+    {
+        new URL(url);
+        return true;
+    } 
+    
+    catch (error) 
+    {
+        return false;
+    }
+}
+
+function shortenURL() 
+{
     const url = document.getElementById('url-input').value.trim();
     const linkName = document.getElementById('name-input').value.trim();
 
-    if (linkName.length === 0) {
-        document.getElementById('result').innerText = 'Please enter a valid link name.';
+    if (!urlExists(url)) {
+        document.getElementById('result').innerText = 'Please enter a valid URL';
+        return;
+    } else if (url.length === 0) {
+        document.getElementById('result').innerText = '';
         return;
     }
 
@@ -59,7 +77,7 @@ function shortenURL() {
 
     if (data[linkName]) {
         // If the link name already exists, display the existing URL to the user
-        document.getElementById('result').innerText = `Link name already exists. URL: ${data[linkName]}`;
+        document.getElementById('result').innerText = `Link already exists. HTML Page: ${getHtmlPageLink(linkName)}`;
         return;
     }
 
@@ -67,5 +85,11 @@ function shortenURL() {
     updateJson(url, linkName);
     createHtmlPage(url, linkName);
 
-    document.getElementById('result').innerText = `Link shortened successfully. Name: ${linkName}`;
+    // Display success message with link to the HTML page
+    document.getElementById('result').innerHTML = `Link shortened successfully. HTML Page: ${getHtmlPageLink(linkName)}`;
+}
+
+function getHtmlPageLink(linkName) 
+{
+    return `<a href="${folderPath}/${linkName}.html" target="_blank">${folderPath}/${linkName}.html</a>`;
 }
