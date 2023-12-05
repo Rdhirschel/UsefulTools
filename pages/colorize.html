@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Photo Filters</title>
+        <link rel="stylesheet" href="/styles/styles.css">
+        <link rel="stylesheet" href="/styles/colorize.css">
+      </head>
+    
+    <body>
+      <div class="header">
+        <h1><u>Photo Colorize</u></h1>
+        <p>Apply a singular color to your image.</p>
+      </div>
+
+      <div class="sidenav">
+        <a href="../index.html">Home Page</a>
+        <a href="../pages/url.html">URL Shortener</a>
+        <a href="example3.html">Example 3</a>
+      </div>
+
+      <div class="card">
+        <!-- <div class="card-body">
+          This is some text within a card body.
+        </div> -->
+        <img src = "/images/1.png" id="uploaded-image">
+        <div>
+          <label for="input-file">Upload Image</label>
+        </div>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6">
+            <div class="card2" width="100%" height="100%">
+              <div class="card-body" id="preview-img">
+                 Preview
+               </div>
+              <img src = "/images/1.png" id="preview-image" onload="getPixels(this)">
+             </div>
+             <div class="card2">
+              <input type="color" id="color" name="color" value="#A665D2" /> 
+              <button type="button" onclick="changeColor()">Colorize</button>
+              <button type="button" onclick="undoChangeColor()">Cancel Colorize</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="../scripts/colorize.js"></script>
+    </body>
+</html>

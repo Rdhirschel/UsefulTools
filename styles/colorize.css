@@ -1,0 +1,127 @@
+.card {
+    display: inline-block;
+    width: 30%;
+    height: 60%;
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 25%;
+    bottom: 35%;
+    background-color: #333;
+    overflow-x: hidden;
+    padding: px;
+    text-align: center;
+    border-radius: 15px;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    margin:30px
+}
+
+.card img {
+    /* display: block;
+    position: relative; */
+    height: 50%;
+    position:relative;
+    top: 20%;
+    border-radius: 15px;
+}
+
+.card label {
+    display: block;
+    position:relative;
+    width: 75%;
+    bottom: -105px;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 5px auto;
+}
+
+.card label:hover {
+    transition: 0.5s;
+    background-color:#666;
+}
+
+.card input {
+    position:relative;
+    top: 20%;
+    visibility: hidden;
+}
+
+.container-fluid {
+    position:relative;
+}
+
+.container-fluid row {
+    position:relative;
+}
+
+.row {
+    position:relative;
+}
+
+
+.card2 {
+    display: inline-block;
+    width: 60%;
+    height: 60%;
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 25%;
+    bottom: 35%;
+    background-color: #333;
+    overflow-x: shown;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    margin:30px
+}
+
+.card2 img {
+    display:inline-block;
+    /* width: 90%; */
+    position:relative;
+    top: 0%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.card2 button {
+    display:inline-block;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    font-size: 20px;
+    color:#ffffff;
+    background-color: #333;
+    border-style: solid;
+    border-color: #666;
+    border-radius: 15px;
+    width:75%;
+    height:50px;
+    margin: 30px;
+}
+
+.card2 button:hover {
+    transition: 0.5s;
+    background-color: #666;
+}
+
+.card2 input[type="color"] {
+    display:inline-block;
+    position:relative;
+    border-radius: 15px;
+    border-color: #666;
+    width:45%;
+    height: 50px;
+    background-color:#555;
+    margin:15px;
+    padding:4px;
+}
+
+.card2 input[type="color"]:hover {
+    transition: 0.5s;
+    background-color:#666;
+}
