@@ -1,31 +1,23 @@
-// Import necessary modules
-const { createHash } = require('crypto');
-const fs = require('fs');
-const path = require('path');
-
-// Define the folder and file paths
 const folderPath = 'short';
-const jsonFilePath = path.join(folderPath, 'saves.json');
+const localStorageKey = 'saves';
+const serverUrl = 'http://localhost:3000/createFile'; 
 
-function updateJson(url, linkName) 
-{
+function updateLocalStorage(linkName, url) {
     let data = {};
 
-    if (fs.existsSync(jsonFilePath)) 
-    {
-        const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
-        data = JSON.parse(jsonData);
+    const storedData = localStorage.getItem(localStorageKey);
+    if (storedData) {
+        data = JSON.parse(storedData);
     }
 
     data[linkName] = url;
-    fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
+    localStorage.setItem(localStorageKey, JSON.stringify(data));
 }
 
-function createHtmlPage(url, linkName) 
-{
+async function createHtmlPage(url, linkName) {
     const sanitizedLinkName = linkName.replace(/[^a-zA-Z0-9]/g, '_');
 
-    const html = `
+    const htmlContent = `
         <!DOCTYPE html>
         <html>
         <head>
@@ -38,58 +30,55 @@ function createHtmlPage(url, linkName)
         </html>
     `;
 
-    const fileName = `${sanitizedLinkName}.html`;
-    const filePath = path.join(folderPath, fileName);
-
-    fs.writeFileSync(filePath, html);
+    // Send a request to the server to create the HTML file
+    await fetch(serverUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            filePath: `${folderPath}/${sanitizedLinkName}.html`,
+            content: htmlContent,
+        }),
+    });
 }
 
 function urlExists(url) 
 {
-    try 
-    {
+    try {
         new URL(url);
         return true;
-    } 
-    
-    catch (error) 
-    {
+    } catch (error) {
         return false;
     }
 }
 
-function shortenURL() 
-{
+async function shortenURL() {
     const url = document.getElementById('url-input').value.trim();
     const linkName = document.getElementById('name-input').value.trim();
 
-    if (!urlExists(url)) {
-        document.getElementById('result').innerText = 'Please enter a valid URL';
-        return;
-    } else if (url.length === 0) {
+    if (url.length === 0) {
         document.getElementById('result').innerText = '';
+        return;
+    } else if (!urlExists(url)) {
+        document.getElementById('result').innerText = 'Please enter a valid URL';
         return;
     }
 
-    // Check if the link name already exists in saves.json
-    const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
-    const data = JSON.parse(jsonData);
+    const storedData = localStorage.getItem(localStorageKey);
+    const data = storedData ? JSON.parse(storedData) : {};
 
     if (data[linkName]) {
-        // If the link name already exists, display the existing URL to the user
         document.getElementById('result').innerText = `Link already exists. HTML Page: ${getHtmlPageLink(linkName)}`;
         return;
     }
 
-    // Update saves.json with the link name
-    updateJson(url, linkName);
-    createHtmlPage(url, linkName);
-
-    // Display success message with link to the HTML page
-    document.getElementById('result').innerHTML = `Link shortened successfully. HTML Page: ${getHtmlPageLink(linkName)}`;
+    updateLocalStorage(linkName, url);
+    await createHtmlPage(url, linkName);
+    document.getElementById('result').innerHTML = `Link shortened successfully. HTML Page: ${getHtmlPageLink(linkName)}`; 
 }
 
-function getHtmlPageLink(linkName) 
-{
-    return `<a href="${folderPath}/${linkName}.html" target="_blank">${folderPath}/${linkName}.html</a>`;
+function getHtmlPageLink(linkName) {
+    // Create a link to view the HTML page on the server
+    return `<a href="${serverUrl}/${folderPath}/${linkName}.html" target="_blank">${folderPath}/${linkName}.html</a>`;
 }
