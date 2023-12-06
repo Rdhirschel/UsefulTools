@@ -1,8 +1,9 @@
 const folderPath = 'short';
 const localStorageKey = 'saves';
-const serverUrl = 'http://localhost:3000/createFile'; 
+const serverUrl = window.location.origin + '/createFile';
 
-function updateLocalStorage(linkName, url) {
+function updateLocalStorage(linkName, url) 
+{
     let data = {};
 
     const storedData = localStorage.getItem(localStorageKey);
@@ -14,7 +15,8 @@ function updateLocalStorage(linkName, url) {
     localStorage.setItem(localStorageKey, JSON.stringify(data));
 }
 
-async function createHtmlPage(url, linkName) {
+async function createHtmlPage(url, linkName) 
+{
     const sanitizedLinkName = linkName.replace(/[^a-zA-Z0-9]/g, '_');
 
     const htmlContent = `
