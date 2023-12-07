@@ -1,7 +1,6 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
-const ServerUrl = 'https://useful-tools-eight.vercel.app/scripts/server.js';
 
 const app = express();
 app.use(bodyParser.json()); 
