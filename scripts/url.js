@@ -9,7 +9,7 @@ async function shortenURL()
         return;
     }
 
-    const response = await fetch(`${server}`, {
+    const response = await fetch(`${server}/urlshortener`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
