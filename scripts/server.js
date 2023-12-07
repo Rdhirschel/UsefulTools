@@ -1,61 +1,63 @@
 const express = require('express');
 const http = require('http');
-const fs = require('fs');
-const path = require('path');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const WebSocket = require('ws');
+const { MongoClient } = require('mongodb');
 
 const app = express();
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
-
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(cors());
 
-app.options('*', cors());
+const password = process.env.MONGODB_PASSWORD;
 
-app.post('/createFile', (req, res) => {
-    const { filePath, content } = req.body;
+// Connect to MongoDB
+const mongoClient = new MongoClient(`mongodb+srv://rdhirschel:${password}@cluster0.gt6bpjp.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 
-    if (!filePath || !content) {
-        return res.status(400).json({ error: 'Missing filePath or content in the request body' });
-    }
-
-    const fullPath = path.resolve(__dirname, 'public', filePath);
-    console.log('Full Path:', fullPath);
-
+async function connectToDatabase() {
     try {
-        fs.writeFileSync(fullPath, content);
-        res.status(200).json({ message: 'File created successfully' });
+        await mongoClient.connect();
+        console.log('Connected to the database');
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error connecting to the database:', error);
+    }
+}
+
+connectToDatabase();
+
+// Endpoint to handle URL redirection
+app.get('/urlshortener/:shortUrl', async (req, res) => {
+    const { shortUrl } = req.params;
+
+    const urlMapping = await mongoClient.db('urlshortener').collection('urlMappings').findOne({ short: shortUrl });
+
+    if (urlMapping) {
+        return res.redirect(urlMapping.original);
+    } else {
+        return res.status(404).json({ error: 'Short URL not found' });
+    }
+});
+
+// Endpoint to create a short URL
+app.post('/urlshortener', async (req, res) => {
+    const { originalUrl, shortUrl } = req.body;
+
+    if (!originalUrl || !shortUrl) {
+        return res.status(400).json({ error: 'Missing originalUrl or shortUrl in the request body' });
     }
 
-    // Notify connected clients about the file creation
-    wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify({ event: 'fileCreated', filePath }));
-        }
-    });
+    // Check if short URL already exists
+    const existingMapping = await mongoClient.db('urlshortener').collection('urlMappings').findOne({ short: shortUrl });
+
+    if (existingMapping) {
+        return res.status(409).json({ error: 'Short URL already exists' });
+    }
+
+    // Insert new URL mapping
+    await mongoClient.db('urlshortener').collection('urlMappings').insertOne({ original: originalUrl, short: shortUrl });
+
+    return res.status(201).json({ message: 'Short URL created successfully' });
 });
 
-// Serve static files from the 'public' directory
-app.use(express.static('public'));
-
-// WebSocket connection handling
-wss.on('connection', (ws) => {
-    console.log('WebSocket connection established');
-
-    // Handle messages from clients if needed
-    ws.on('message', (message) => {
-        console.log('Received message:', message);
-    });
-});
-
-server.listen(port, () => {
+app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
