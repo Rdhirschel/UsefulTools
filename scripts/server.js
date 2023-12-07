@@ -1,13 +1,5 @@
-const express = require('express');
-const http = require('http');
-const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
-
-const app = express();
 const port = process.env.PORT || 3000;
-
-app.use(bodyParser.json());
-
 const password = process.env.MONGODB_PASSWORD;
 
 // Connect to MongoDB
