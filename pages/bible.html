@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang=en>
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Verse Copier</title>
+                <link rel="stylesheet" href="/styles/styles.css">
+                <link rel="stylesheet" href="/styles/bible.css">
+            </head>
+        
+        <body>
+            <div class="header">
+                <h1><u>Old Testament Verse Copier</u></h1>
+                <p>Choose The wanted copied verse</p>
+            </div>
+
+            <div class="sidenav">
+                <a href="../index.html">Home Page</a>
+                <a href="../pages/url.html">URL Shortener (Doesn't Work Yet)</a>
+                <a href="colorize.html">Photo Colorize</a>
+                <a href="y2mp3.html">Y2MP3</a>
+            </div>
+
+            <div class="verse-selector">
+                <select id="book-group" onchange="showBooks()">
+                    <option value="torah">תורה</option>
+                    <option value="neviim">נביאים</option>
+                    <option value="ketuvim">כתובים</option>
+                </select>
+
+                <select id="book" onchange="showChapters()">
+                    <!-- Options for Torah -->
+                    <option value="Genesis" data-group="torah">בראשית</option>
+                    <option value="Exodus" data-group="torah">שמות</option>
+                    <!-- Add more options for Torah -->
+
+                    <!-- Options for Neviim -->
+                    <option value="Joshua" data-group="neviim">יהושע</option>
+                    <option value="Judges" data-group="neviim">שופטים</option>
+                    <!-- Add more options for Neviim -->
+
+                    <!-- Options for Ketuvim -->
+                    <option value="Psalms" data-group="ketuvim">תהילים</option>
+                    <option value="Proverbs" data-group="ketuvim">משלי</option>
+                    <!-- Add more options for Ketuvim -->
+                </select>
+
+                <select id="chapter" onchange="showVerses()">
+                    <!-- Add options for chapters based on the selected book -->
+                </select>
+
+                <select id="verse">
+                    <!-- Add options for verses based on the selected book and chapter -->
+                </select>
+            </div>
+
+            <script>
+                function showBooks() {
+                    var bookGroup = document.getElementById("book-group");
+                    var selectedGroup = bookGroup.options[bookGroup.selectedIndex].value;
+
+                    var books = document.getElementById("book").options;
+                    for (var i = 0; i < books.length; i++) {
+                        var book = books[i];
+                        if (book.dataset.group === selectedGroup) {
+                            book.style.display = "block";
+                        } else {
+                            book.style.display = "none";
+                        }
+                    }
+
+                    showChapters();
+                }
+
+                function showChapters() {
+                    var book = document.getElementById("book");
+                    var selectedBook = book.options[book.selectedIndex].value;
+
+                    var chapters = document.getElementById("chapter");
+                    chapters.innerHTML = "";
+
+                    // Add options for chapters based on the selected book
+                    if (selectedBook === "Genesis") {
+                        for (var i = 1; i <= 50; i++) {
+                            var option = document.createElement("option");
+                            option.value = i;
+                            option.text = i;
+                            chapters.appendChild(option);
+                        }
+                    } else if (selectedBook === "Exodus") {
+                        for (var i = 1; i <= 40; i++) {
+                            var option = document.createElement("option");
+                            option.value = i;
+                            option.text = i;
+                            chapters.appendChild(option);
+                        }
+                    }
+                    // Add more options for other books
+
+                    showVerses();
+                }
+
+                function showVerses() {
+                    var book = document.getElementById("book");
+                    var selectedBook = book.options[book.selectedIndex].value;
+
+                    var chapter = document.getElementById("chapter");
+                    var selectedChapter = chapter.options[chapter.selectedIndex].value;
+
+                    var verses = document.getElementById("verse");
+                    verses.innerHTML = "";
+
+                    // Add options for verses based on the selected book and chapter
+                    if (selectedBook === "Genesis" && selectedChapter === "1") {
+                        for (var i = 1; i <= 31; i++) {
+                            var option = document.createElement("option");
+                            option.value = i;
+                            option.text = i;
+                            verses.appendChild(option);
+                        }
+                    } else if (selectedBook === "Genesis" && selectedChapter === "2") {
+                        for (var i = 1; i <= 25; i++) {
+                            var option = document.createElement("option");
+                            option.value = i;
+                            option.text = i;
+                            verses.appendChild(option);
+                        }
+                    }
+                    // Add more options for other chapters
+
+                }
+            </script>
+
+            <script src="../scripts/bible.js"></script>
+        </body>
+</html>
