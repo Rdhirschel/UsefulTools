@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "./scripts/server.js",
+        "src": "server.js",
         "use": "@vercel/node"
       }
     ],
@@ -12,7 +12,7 @@
         "headers": {
           "Access-Control-Allow-Origin": "*"
         },
-        "dest": "src/main.ts",
+        "dest": "/scripts/server.js",
         "methods": [
           "GET",
           "POST",
