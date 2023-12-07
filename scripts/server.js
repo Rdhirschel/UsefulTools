@@ -1,8 +1,9 @@
-const express = require('express'); 
+const express = require('express');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
 
-const app = express();  
+const app = express();
+app.use(bodyParser.json()); 
 const port = process.env.PORT || 3000;
 const password = process.env.MONGODB_PASSWORD;
 
@@ -35,7 +36,7 @@ app.get('/urlshortener/:shortUrl', async (req, res) => {
 
 // Endpoint to create a short URL
 app.post('/urlshortener', async (req, res) => {
-    const { originalUrl, shortUrl } = req.body;
+    const { originalUrl, shortUrl } = req.body; // Extract data from the JSON body
 
     if (!originalUrl || !shortUrl) {
         return res.status(400).json({ error: 'Missing originalUrl or shortUrl in the request body' });
