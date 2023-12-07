@@ -1,4 +1,4 @@
-const server = "..//scripts//server.js";
+const server = 'https://useful-tools-eight.vercel.app';
 async function shortenURL() 
 {
     const url = document.getElementById('url-input').value.trim();
