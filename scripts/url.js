@@ -1,4 +1,7 @@
-const server = 'https://useful-tools-eight.vercel.app/scripts/server.js';
+const baseServerUrl = 'https://useful-tools-eight.vercel.app';
+//const baseServerUrl = "http://127.0.0.1:3000/UsefulTools";
+const serverEndpoint = '/scripts/server.js';
+
 async function shortenURL() 
 {
     const url = document.getElementById('url-input').value.trim();
@@ -9,7 +12,7 @@ async function shortenURL()
         return;
     }
 
-    const response = await fetch(`${server}`, {
+    const response = await fetch(`${baseServerUrl}${serverEndpoint}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
