@@ -1,6 +1,7 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
+const ServerUrl = 'https://useful-tools-eight.vercel.app/scripts/server.js';
 
 const app = express();
 app.use(bodyParser.json()); 
@@ -22,7 +23,7 @@ async function connectToDatabase() {
 connectToDatabase();
 
 // Endpoint to handle URL redirection
-app.get('/:shortUrl', async (req, res) => {
+app.get('/urlshortener/:shortUrl', async (req, res) => {
     const { shortUrl } = req.params;
 
     const urlMapping = await mongoClient.db('urlshortener').collection('urlMappings').findOne({ short: shortUrl });
@@ -38,7 +39,7 @@ app.get('/:shortUrl', async (req, res) => {
 });
 
 // Endpoint to create a short URL
-app.post('/urlshortener', async (req, res) => {
+app.post('/shorten', async (req, res) => {
     const { originalUrl, shortUrl } = req.body; // Extract data from the JSON body
 
     if (!originalUrl || !shortUrl) {

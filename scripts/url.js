@@ -1,6 +1,5 @@
-const baseServerUrl = 'https://useful-tools-eight.vercel.app';
+const ServerUrl = 'https://useful-tools-eight.vercel.app';
 //const baseServerUrl = "http://127.0.0.1:3000/UsefulTools";
-const serverEndpoint = '/scripts/server.js';
 
 async function shortenURL() 
 {
@@ -12,7 +11,7 @@ async function shortenURL()
         return;
     }
 
-    const response = await fetch('/urlshortener', {
+    const response = await fetch(`${ServerUrl}/shorten`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -33,7 +32,7 @@ async function shortenURL()
     }
     
     if (response.ok) {
-        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${baseServerUrl}/urlshortener/${shortUrl}" target="_blank">${baseServerUrl}/urlshortener/${shortUrl}</a>`;
+        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="https://useful-tools-eight.vercel.app/urlshortener/${shortUrl}" target="_blank">https://useful-tools-eight.vercel.app/urlshortener/${shortUrl}</a>`;
     } else {
         document.getElementById('result').innerText = `Error: ${result.error}`;
     }
