@@ -1,4 +1,3 @@
-// /api/urlshortener.js
 const { MongoClient } = require('mongodb');
 
 const password = process.env.MONGODB_PASSWORD;
