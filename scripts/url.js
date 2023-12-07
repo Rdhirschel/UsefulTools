@@ -11,7 +11,7 @@ async function shortenURL()
         return;
     }
 
-    const response = await fetch(`/shorten`, {
+    const response = await fetch(`${ServerUrl}/api/shorten`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -32,8 +32,7 @@ async function shortenURL()
     }
     
     if (response.ok) {
-        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="https://useful-tools-eight.vercel.app/urlshortener/${shortUrl}" target="_blank">https://useful-tools-eight.vercel.app/urlshortener/${shortUrl}</a>`;
-    } else {
+        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/urlshortener/${shortUrl}" target="_blank">${ServerUrl}/api/urlshortener/${shortUrl}</a>`;    } else {
         document.getElementById('result').innerText = `Error: ${result.error}`;
     }
 }
