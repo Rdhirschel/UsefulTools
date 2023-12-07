@@ -44,7 +44,8 @@ module.exports = async (req, res) => {
             res.status(405).send('Method Not Allowed');
         }
     } 
-    catch (error) {
+    catch (error) 
+    {
         console.error('Error connecting to the database:', error);
         return res.status(500).json({ error: 'Server error' });
     } finally {
