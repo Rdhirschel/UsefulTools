@@ -22,14 +22,17 @@ async function connectToDatabase() {
 connectToDatabase();
 
 // Endpoint to handle URL redirection
-app.get('/urlshortener/:shortUrl', async (req, res) => {
+app.get('/:shortUrl', async (req, res) => {
     const { shortUrl } = req.params;
 
     const urlMapping = await mongoClient.db('urlshortener').collection('urlMappings').findOne({ short: shortUrl });
 
-    if (urlMapping) {
+    if (urlMapping) 
+    {
         return res.redirect(urlMapping.original);
-    } else {
+    } 
+    else 
+    {
         return res.status(404).json({ error: 'Short URL not found' });
     }
 });

@@ -12,7 +12,7 @@ async function shortenURL()
         return;
     }
 
-    const response = await fetch(`${baseServerUrl}${serverEndpoint}`, {
+    const response = await fetch('/urlshortener', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -32,13 +32,6 @@ async function shortenURL()
         console.error(`Error: ${errorMessage}`);
     }
     
-    if (response.ok) {
-        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${baseServerUrl}/urlshortener/${shortUrl}" target="_blank">${baseServerUrl}/urlshortener/${shortUrl}</a>`;
-    } else {
-        document.getElementById('result').innerText = `Error: ${result.error}`;
-    }
-    
-
     if (response.ok) {
         document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${baseServerUrl}/urlshortener/${shortUrl}" target="_blank">${baseServerUrl}/urlshortener/${shortUrl}</a>`;
     } else {
