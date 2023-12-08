@@ -32,7 +32,7 @@ async function shortenURL()
     }
     if (response.ok) 
     {
-        shortUrl = response.shortUrl;
+        shortUrl = result.shortUrl;
         document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/shorten?shortUrl=${shortUrl}" target="_blank">${ServerUrl}/api/shorten?shortUrl=${shortUrl}</a>`; 
     }
     else {
