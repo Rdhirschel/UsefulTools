@@ -3,7 +3,7 @@ const ServerUrl = 'https://useful-tools-eight.vercel.app';
 async function shortenURL() 
 {
     const url = document.getElementById('url-input').value.trim();
-    const shortUrl = document.getElementById('name-input').value.trim();
+    let shortUrl = document.getElementById('name-input').value.trim();
 
     if (url.length === 0) {
         document.getElementById('result').innerText = 'Please enter a URL';
