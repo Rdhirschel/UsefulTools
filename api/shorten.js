@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 let mongoClient;
-
+const password = process.env.MONGODB_PASSWORD;
 async function connectToDatabase() 
 {
   if (mongoClient) 
@@ -11,14 +11,12 @@ async function connectToDatabase()
   
   else 
   {
-    const password = process.env.MONGODB_PASSWORD;
-    console.log(password);
     mongoClient = new MongoClient(`mongodb+srv://rdhirschel:${password}@cluster0.gt6bpjp.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
     await mongoClient.connect();
     return mongoClient;
   }
 }
-
+return password;
 module.exports = async (req, res) => {
   try {
     const mongoClient = await connectToDatabase();
