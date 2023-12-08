@@ -23,14 +23,16 @@ async function shortenURL()
 
     let result; 
 
-    if (response.ok) {
+    if (response.ok) 
+    {
         result = await response.json();
     } else {
         const errorMessage = await response.text();
         console.error(`Error: ${errorMessage}`);
     }
-    
-    if (response.ok) {
+    if (response.ok) 
+    {
+        shortUrl = response.shortUrl;
         document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/shorten?shortUrl=${shortUrl}" target="_blank">${ServerUrl}/api/shorten?shortUrl=${shortUrl}</a>`; 
     }
     else {

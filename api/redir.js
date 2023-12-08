@@ -13,7 +13,6 @@ async function connectToDatabase() {
   }
 }
 
-let GeneratedShortUrl = false;
 module.exports = async (req, res) => {
   try {
     const mongoClient = await connectToDatabase();
@@ -43,7 +42,6 @@ module.exports = async (req, res) => {
     }
 
     await mongoClient.db('urlshortener').collection('urlMappings').insertOne({ original: originalUrl, short: shortUrl });
-
     return res.status(201).json({ message: 'Short URL created successfully', shortUrl: shortUrl });
   } 
   
