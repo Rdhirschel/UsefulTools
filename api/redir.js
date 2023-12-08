@@ -1,13 +1,13 @@
 const { MongoClient } = require('mongodb');
 
 let mongoClient;
+const password = process.env.MONGODB_PASSWORD;
 
 async function connectToDatabase() {
   if (mongoClient) {
     return mongoClient;
   } else {
-    const password = process.env.MONGODB_PASSWORD;
-    mongoClient = new MongoClient(`mongodb+srv://rdhirschel:${password}@cluster0.gt6bp.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoClient = new MongoClient(`mongodb+srv://rdhirschel:${password}@cluster0.gt6bpjp.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
     await mongoClient.connect();
     return mongoClient;
   }

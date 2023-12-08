@@ -16,7 +16,6 @@ async function connectToDatabase()
     return mongoClient;
   }
 }
-return res.status(69).json({ error: `${password}` });
 module.exports = async (req, res) => {
   try {
     const mongoClient = await connectToDatabase();
