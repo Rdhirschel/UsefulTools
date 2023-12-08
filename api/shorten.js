@@ -1,9 +1,9 @@
-//const { MongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 const password = process.env.MONGODB_PASSWORD;
-console.log(password);
+//console.log(password);
 const mongoClient = new MongoClient(`mongodb+srv://rdhirschel:${password}@cluster0.gt6bpjp.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
-console.log(mongoClient);
+//console.log(mongoClient);
 module.exports = async (req, res) => {
     try {
         await mongoClient.connect();
