@@ -1,5 +1,4 @@
 const ServerUrl = 'https://useful-tools-eight.vercel.app';
-//const baseServerUrl = "http://127.0.0.1:3000/UsefulTools";
 
 async function shortenURL() 
 {
@@ -32,7 +31,8 @@ async function shortenURL()
     }
     
     if (response.ok) {
-        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/shorten/${shortUrl}" target="_blank">${ServerUrl}/api/shorten/${shortUrl}</a>`;    } else {
+        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/redir/${shortUrl}" target="_blank">${ServerUrl}/api/redir/${shortUrl}</a>`;    
+    } else {
         document.getElementById('result').innerText = `Error: ${result.error}`;
     }
 }
