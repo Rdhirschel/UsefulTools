@@ -1,0 +1,12 @@
+{
+    "name": "useful-tools",
+    "version": "1.0.0",
+    "description": "Useful Tools for personal use",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "mongodb": "^3.7.3"
+    }
+  }
