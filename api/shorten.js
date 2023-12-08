@@ -2,13 +2,18 @@ const { MongoClient } = require('mongodb');
 
 let mongoClient;
 
-async function connectToDatabase() {
-  if (mongoClient) {
+async function connectToDatabase() 
+{
+  if (mongoClient) 
+  {
     return mongoClient;
-  } else {
+  } 
+  
+  else 
+  {
     const password = process.env.MONGODB_PASSWORD;
     mongoClient = new MongoClient(`mongodb+srv://rdhirschel:${password}@cluster0.gt6bpjp.mongodb.net/`, { useNewUrlParser: true, useUnifiedTopology: true });
-    await mongoClient.connect();
+    //await mongoClient.connect();
     return mongoClient;
   }
 }
