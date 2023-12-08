@@ -10,7 +10,7 @@ async function shortenURL()
         return;
     }
 
-    const response = await fetch(`${ServerUrl}/api/shorten`, {
+    const response = await fetch(`${ServerUrl}/api/redir`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ async function shortenURL()
     }
     
     if (response.ok) {
-        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/redir/${shortUrl}" target="_blank">${ServerUrl}/api/redir/${shortUrl}</a>`;    
+        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/shorten/${shortUrl}" target="_blank">${ServerUrl}/api/shorten/${shortUrl}</a>`;    
     } else {
         document.getElementById('result').innerText = `Error: ${result.error}`;
     }

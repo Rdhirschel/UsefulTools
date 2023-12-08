@@ -13,7 +13,7 @@ async function connectToDatabase()
   {
     const password = process.env.MONGODB_PASSWORD;
     mongoClient = new MongoClient(`mongodb+srv://rdhirschel:${password}@cluster0.gt6bpjp.mongodb.net/`, { useNewUrlParser: true, useUnifiedTopology: true });
-    //await mongoClient.connect();
+    await mongoClient.connect();
     return mongoClient;
   }
 }
