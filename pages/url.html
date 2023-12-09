@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="../styles/url.css">
     <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/url.css">
 </head>
 <body>
     <div class="sidenav">
@@ -20,7 +20,10 @@
         <input type="text" id="url-input" placeholder="Enter your URL here">
         <input type="text" id="name-input" placeholder="Enter an optional name">
         <button onclick="shortenURL()">Shorten URL</button>
-        <p id="result"></p>
+        <p id="result">
+            <input id="shortUrlDisplay">
+            <button id="copyButton">Copy</button>
+        </p>
     </div>
     <script src="../scripts/url.js"></script>
 </body>

@@ -33,9 +33,15 @@ async function shortenURL()
     if (response.ok) 
     {
         shortUrl = result.shortUrl;
-        document.getElementById('result').innerHTML = `Short URL created successfully: <a href="${ServerUrl}/api/shorten?shortUrl=${shortUrl}" target="_blank">${ServerUrl}/api/shorten?shortUrl=${shortUrl}</a>`; 
+        document.getElementById('result').innerHTML = `<a href="${ServerUrl}/api/shorten?shortUrl=${shortUrl}" target="_blank">${ServerUrl}/api/shorten?shortUrl=${shortUrl}</a>`; 
     }
     else {
         document.getElementById('result').innerText = `Error: ${result.error}`;
     }
 }
+
+document.getElementById('copyButton').addEventListener('click', function() {
+    const shortUrlDisplay = document.getElementById('shortUrlDisplay');
+    shortUrlDisplay.select();
+    document.execCommand('copy');
+});

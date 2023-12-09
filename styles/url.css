@@ -1,12 +1,17 @@
 .header input[type="text"] 
 {
     width: 300px;
+    height: 45px;
     padding: 10px;
     margin: 10px;
     font-size: 16px;
 }
 
-#result {
-    font-size: 20px;
-    margin-top: 20px;
+button {
+    height: 45px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
 }
+
+
