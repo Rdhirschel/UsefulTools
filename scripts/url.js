@@ -26,22 +26,18 @@ async function shortenURL()
     if (response.ok) 
     {
         result = await response.json();
-    } else {
-        const errorMessage = await response.text();
-        console.error(`Error: ${errorMessage}`);
-    }
-    if (response.ok) 
-    {
         shortUrl = result.shortUrl;
-        document.getElementById('result').value = `<a href="${ServerUrl}/api/shorten?shortUrl=${shortUrl}" target="_blank">${ServerUrl}/api/shorten?shortUrl=${shortUrl}</a>`; 
-    }
-    else {
-        document.getElementById('result').value = `Error: ${result.error}`;
+        document.getElementById('result').value = `${ServerUrl}/api/shorten?shortUrl=${shortUrl}`; 
+    } 
+    else 
+    {
+        const errorMessage = await response.text();
+        document.getElementById('result').value = `Error: ${errorMessage}`;
     }
 }
 
 document.getElementById('copyButton').addEventListener('click', function() {
-    const shortUrlDisplay = document.getElementById('shortUrlDisplay');
-    shortUrlDisplay.select();
+    const result = document.getElementById('result');
+    result.select();
     document.execCommand('copy');
 });
