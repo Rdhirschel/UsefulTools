@@ -107,3 +107,11 @@ function undoChangeColor()
 
     prevPic.src = setPic.src;
 }
+
+document.getElementById('download-btn').addEventListener('click', function() {
+    var image = document.getElementById('preview-image');
+    var link = document.createElement('a');
+    link.href = image.src;
+    link.download = 'download.png';
+    link.click();
+});
