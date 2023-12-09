@@ -1,4 +1,4 @@
-const ServerUrl = 'https://useful-tools-eight.vercel.app';
+const ServerUrl = 'https://toolzz.vercel.app';
 
 async function shortenURL() 
 {
