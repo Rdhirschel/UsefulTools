@@ -16,14 +16,15 @@
     </div>
     <div class="header">
         <h1>URL Shortener</h1>
-        <input type="text" id="url-input" placeholder="Enter your URL here">
-        <input type="text" id="name-input" placeholder="Enter an optional name">
-        <button onclick="shortenURL()">Shorten URL</button>
+        <form>
+            <input type="text" id="url-input" placeholder="Enter your URL here">
+            <input type="text" id="name-input" placeholder="Enter an optional name">
+            <button type="button" onclick="shortenURL()">Shorten URL</button>
+        </form>
         <p>
             <input id="result" readonly></input>
             <button id="copyButton">Copy</button>
         </p>
-
     </div>
     <script src="../scripts/url.js"></script>
 </body>
