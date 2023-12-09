@@ -6,7 +6,7 @@ async function shortenURL()
     let shortUrl = document.getElementById('name-input').value.trim();
 
     if (url.length === 0) {
-        document.getElementById('result').innerText = 'Please enter a URL';
+        document.getElementById('result').value = 'Please enter a URL';
         return;
     }
 
@@ -33,10 +33,10 @@ async function shortenURL()
     if (response.ok) 
     {
         shortUrl = result.shortUrl;
-        document.getElementById('result').innerHTML = `<a href="${ServerUrl}/api/shorten?shortUrl=${shortUrl}" target="_blank">${ServerUrl}/api/shorten?shortUrl=${shortUrl}</a>`; 
+        document.getElementById('result').value = `<a href="${ServerUrl}/api/shorten?shortUrl=${shortUrl}" target="_blank">${ServerUrl}/api/shorten?shortUrl=${shortUrl}</a>`; 
     }
     else {
-        document.getElementById('result').innerText = `Error: ${result.error}`;
+        document.getElementById('result').value = `Error: ${result.error}`;
     }
 }
 
