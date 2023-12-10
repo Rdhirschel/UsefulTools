@@ -42,7 +42,7 @@ This project is a collection of useful tools for personal usage. It's designed t
 
 - **Youtube to MP3 Converter**: Yet to be added.
 
-- **QR Code Generator:** The QR Code Generator works by taking a text or URL input from the user and using a library called (`qrcode.js`)[https://github.com/davidshimjs/qrcodejs] to generate a QR code that represents the input. The QR code is displayed on the page as an image. The user has the option to download the QR code image for use elsewhere.
+- **QR Code Generator:** The QR Code Generator works by taking a text or URL input from the user and using a library called [`qrcode.js`](https://github.com/davidshimjs/qrcodejs) to generate a QR code that represents the input. The QR code is displayed on the page as an image. The user has the option to download the QR code image for use elsewhere.
 
 *Please note that these are simplified explanations. The actual implementation involves more details and considerations.*
 
