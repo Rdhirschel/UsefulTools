@@ -27,6 +27,12 @@ This project is a collection of useful tools for personal usage. It's designed t
 ### Youtube to MP3 Converter
  - Still isn't complete.
 
+### QR Code Generator
+
+1. Navigate to the QR Code Generator page.
+2. Enter the text or URL you want to encode in the input field.
+3. Click the "Generate QR Code" button.
+4. The page will display a QR code that represents the entered text or URL. You can scan this QR code with a QR code scanner to decode it.
 
 ## Technical Details
 
@@ -35,6 +41,8 @@ This project is a collection of useful tools for personal usage. It's designed t
 - **Photo Filters:** The Photo Filters feature works by manipulating the pixels of an image. When a user uploads an image, the image is drawn onto a canvas and the pixel data is extracted. The user can then select a color filter to apply to the image. The color filter works by converting the RGB color of each pixel to HSL (Hue, Saturation, Lightness), changing the hue and saturation to match the selected color, and then converting back to RGB. The lightness of the original pixel is preserved, maintaining the image's original shading. The filtered image is then redrawn on the canvas. The user has the option to download the filtered image or undo the color change.
 
 - **Youtube to MP3 Converter**: Yet to be added.
+
+- **QR Code Generator:** The QR Code Generator works by taking a text or URL input from the user and using a library called (`qrcode.js`)[https://github.com/davidshimjs/qrcodejs] to generate a QR code that represents the input. The QR code is displayed on the page as an image. The user has the option to download the QR code image for use elsewhere.
 
 *Please note that these are simplified explanations. The actual implementation involves more details and considerations.*
 

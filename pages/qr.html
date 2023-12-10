@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Generator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/qr.css">
+</head>
+<body>
+    <div class="header">
+        <h1>QR Code Generator</h1>
+        <p>Generate a QR code for any URL.</p>
+            <div class="input-button-container">
+                <input id="input" type="text" placeholder="Enter URL or text here">
+                <button id="generate" onclick="GenerateQRCode()">Generate QR Code</button>
+            </div>
+        <p>
+            <div class="qr-panel">
+                <div id="result" src="" alt=""></div>
+            </div>
+        </p>
+        <button id="downloadButton" onclick="downloadQRCode()">Download
+            <i class="fa fa-download"></i>
+        </button>    
+    </div>
+    
+    <div class="sidenav">
+        <a href="../index.html">Home Page</a>
+        <a href="colorize.html">Photo Filters</a>
+        <a href="y2mp3.html">Y2MP3</a>
+        <a href="url.html">URL Shortener</a>
+    </div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="../scripts/qr.js"></script>
+</body>
+</html>
