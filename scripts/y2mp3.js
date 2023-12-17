@@ -1,13 +1,3 @@
-var ytdl = require(['ytdl-core'], function (ytdl) {
-   ytdl = ytdl;
-});
-var ffmpeg = require(['fluent-ffmpeg'], function (ffmpeg) {
-   ffmpeg = ffmpeg;
-});
-var fs = require(['fs'], function (fs) {
-   fs = fs;
-});
-
 async function convertYoutubeToMp3(url, outputFilename) {
    try {
       require(['ytdl-core', 'fluent-ffmpeg', 'fs'], function (ytdl, ffmpeg, fs) {
