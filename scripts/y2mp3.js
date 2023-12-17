@@ -1,37 +1,47 @@
-//const ytdl = require('ytdl-core');
+const ServerUrl = 'https://toolzz.vercel.app';
 
-
-async function convertYoutubeToMp3(url, outputFilename) {
-   document.getElementById("error").textContent = "asdjfsasdf";
-
-   try {
-         
-         const info = ytdl.getInfo(url);
-         // Select the video format and quality
-         const format = ytdl.chooseFormat(info.formats, { quality: "248" });
-         // Create a write stream to save the video file
-         const outputFilePath = 'audio/' + `${info.videoDetails.title}.${format.container}`;
-         const outputStream = fs.createWriteStream(outputFilePath);
-         // Download the video file
-         ytdl.downloadFromInfo(info, { format: format }).pipe(outputStream);
-         // When the download is complete, show a message
-         outputStream.on('finish', () => {
-            console.log(`Finished downloading: ${outputFilePath}`);
-            document.getElementById("converted").src = outputFilePath;
-      });
-
-   } catch (err) {
-      console.error(err);
-   }
+function CheckIfValidYoutubeUrl(url)  
+{
+      var regExp = /^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/;
+      var match = url.match(regExp);
+      if (match) {
+         return true;
+      }
+      return false;
 }
 
-function validateAndSubmit()
+async function validateAndSubmit()
 {
-   var yout = document.getElementById("url").value;
-   if (yout == null || yout == "") {
+   var url = document.getElementById("url").value;
+
+   if (url == null || url == "" || !CheckIfValidYoutubeUrl(url)) {
       alert("Please Enter the Youtube Video URL");
       return;
    }
-   document.getElementById("error").textContent = "asdfasdf";
-   convertYoutubeToMp3(yout, "test.mp3");
+
+   //make request to server
+   const response = await fetch(`${ServerUrl}/api/mp3`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          youtubeUrl: url,
+      }),
+   });
+
+   if (response.ok) 
+   {
+      const result = await response.json();
+      document.getElementById('result').value = result.mp3Url;
+   } 
+   else 
+   {
+      const errorMessage = await response.text();
+      document.getElementById('result').value = `Error: ${errorMessage.text}`;
+   }
+}
+
+function download() {
+   
 }
