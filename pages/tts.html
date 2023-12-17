@@ -33,10 +33,10 @@
       </div>
 
       <script>
-        function speakText() {
+        async function speakText() {
             let text = document.getElementById('saying').value;
             let url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' + encodeURIComponent(text) + '&tl=en';
-            wait(2);
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for 2 seconds
             let ttsResult = document.getElementById('ttsResult');
             ttsResult.src = url;
             ttsResult.parentElement.load();
