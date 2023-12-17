@@ -7,7 +7,13 @@
         <link rel="stylesheet" href="../styles/styles.css">
         <link rel="stylesheet" href="../styles/colorize.css">
         <script src="../scripts/require.js"></script>
-        <script src="../scripts/y2mp3.js">
+        <!-- <script>
+          const ytdl = require('ytdl-core');
+        </script> -->
+
+        <script type="module" >
+          import * as fs from 'fs';
+          import * as ytdl from 'ytdl-core';
         </script>
         <link rel="icon" href="../favicon.ico" type="image/x-icon">
       </head>
@@ -29,11 +35,14 @@
       <div class="card2">
         <input type="text" id="url" name="url" placeholder="Enter Youtube URL">
         <button type="button" onclick="validateAndSubmit()">Convert</button>
-        <textarea id="output" name="output" rows="10" cols="50" readonly></textarea>
+        <audio controls>
+          <source id="converted" src="../audio/" type="audio/mp3">
+        Your browser does not support the audio element.
+        </audio>
         <p id="error"></p>
       </div>
 
-      <!-- <script src="../scripts/y2mp3.js"></script> -->
+      <script src="../scripts/y2mp3.js"></script>
 
       <!-- <iframe src="https://convert2mp3s.com/api/single/mp3?url=https://www.youtube.com/watch?v=pRpeEdMmmQ0" width="100%" height="100%" allowtransparency="true" scrolling="no" style="border:none"></iframe> -->
     </body>
