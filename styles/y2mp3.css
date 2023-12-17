@@ -1,7 +1,19 @@
-#pytest {
-    font-size: 100px;
-    /* display:block;
-    width:60%;
+.card2 {
+    display: inline-block;
+    width: 60%;
     height: 60%;
-    left: 35%; */
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 25%;
+    bottom: 35%;
+    background-color: #333;
+    overflow-x: shown;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    margin:30px+5%;
 }

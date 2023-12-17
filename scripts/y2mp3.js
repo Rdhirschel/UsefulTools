@@ -1,11 +1,38 @@
+var ytdl = require(['ytdl-core'], function (ytdl) {
+   ytdl = ytdl;
+});
+var ffmpeg = require(['fluent-ffmpeg'], function (ffmpeg) {
+   ffmpeg = ffmpeg;
+});
+var fs = require(['fs'], function (fs) {
+   fs = fs;
+});
 
-function validatebeforesubmit(thisform) {
-var yout = thisform.ytlink.value;
-if(yout==null || yout == "")
-   {
-   alert("Please Enter the Youtube Video URL");
-   thisform.ytlink.focus();
-   return false;
+async function convertYoutubeToMp3(url, outputFilename) {
+   try {
+      const info = await ytdl.getInfo(url);
+      // Select the video format and quality
+      const format = ytdl.chooseFormat(info.formats, { quality: "248" });
+      // Create a write stream to save the video file
+      const outputFilePath = `${info.videoDetails.title}.${format.container}`;
+      const outputStream = fs.createWriteStream(outputFilePath);
+      // Download the video file
+      ytdl.downloadFromInfo(info, { format: format }).pipe(outputStream);
+      // When the download is complete, show a message
+      outputStream.on('finish', () => {
+         console.log(`Finished downloading: ${outputFilePath}`);
+      });
+   } catch (err) {
+      console.error(err);
    }
-return true;
-}   
+}
+
+function validateAndSubmit()
+{
+   var yout = document.getElementById("url").value;
+   if (yout == null || yout == "") {
+      alert("Please Enter the Youtube Video URL");
+      return;
+   }
+   convertYoutubeToMp3(yout, document.getElementById("output").value);
+}

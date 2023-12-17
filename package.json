@@ -4,9 +4,12 @@
     "description": "Useful Tools for personal use",
     "main": "index.js",
     "scripts": {
-      "start": "node index.js"
+        "start": "node index.js"
     },
     "dependencies": {
-      "mongodb": "^3.7.3"
+        "express": "^4.18.2",
+        "fluent-ffmpeg": "^2.1.2",
+        "mongodb": "^3.7.3",
+        "ytdl-core": "^4.11.5"
     }
-  }
+}
