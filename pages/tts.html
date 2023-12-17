@@ -32,33 +32,8 @@
         </audio>
       </div>
 
-      <script>
-        const ServerUrl = 'https://toolzz.vercel.app';
+      <script src="../scripts/tts.js"></script>
 
-        async function speakText() {
-            let userText = document.getElementById('saying').value;
-            const response = await fetch(`${ServerUrl}/api/speak`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    text:userText
-                }),
-            });
-
-            if (response.ok) 
-            {
-                const result = await response.json();
-            } 
-            else {
-                alert("HTTP-Error: " + response.status);    
-            }
-            // let ttsResult = document.getElementById('ttsResult');
-            // ttsResult.src = url;
-            // ttsResult.parentElement.load();
-        }
-        </script>
 
     </body>
 </html>
