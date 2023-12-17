@@ -37,7 +37,6 @@
 
         async function speakText() {
             let userText = document.getElementById('saying').value;
-            let url = 'http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' + encodeURIComponent(text) + '&tl=en';
             const response = await fetch(`${ServerUrl}/api/speak`, {
                 method: 'POST',
                 headers: {
