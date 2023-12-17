@@ -124,3 +124,16 @@
     transition: 0.5s;
     background-color:#666;
 }
+
+.card2 input[type="text"] {
+    display: block;
+    position:relative;
+    border-radius:15px;
+    width: 80%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+    margin: 1px 10%; 
+    z-index: 2;
+    font-size: 20px;
+}

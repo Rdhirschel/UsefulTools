@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Y2mp3</title>
+        <link rel="stylesheet" href="../styles/styles.css">
+        <link rel="stylesheet" href="../styles/colorize.css">
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">
+      </head>
+    
+    <body>
+      <div class="header">
+        <h1><u>TTS</u></h1>
+        <p>Text To Speech!</p>
+      </div>
+
+      <div class="sidenav">
+        <a href="../index.html">Home Page</a>
+        <a href="../pages/colorize.html">Photo Filters</a>
+        <a href="../pages/url.html">URL Shortener</a>
+        <a href="qr.html">QR Code Generator</a>
+      </div>
+
+
+      <div class="card2">
+        <input type="text" id="saying" name="saying" placeholder="The slow white dog runs over the hyped fox.">
+        <button type="button" onclick="speakText()">Speak Up</button>
+        <audio controls id="acontr">
+            <source id="ttsResult" src=".."  type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+
+      <script>
+        function speakText() {
+            let text = document.getElementById('saying').value;
+            let url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' + encodeURIComponent(text) + '&tl=en';
+            let ttsResult = document.getElementById('ttsResult');
+            ttsResult.src = url;
+            ttsResult.parentElement.load();
+            ttsResult.parentElement.play();
+        }
+        </script>
+
+    </body>
+</html>
