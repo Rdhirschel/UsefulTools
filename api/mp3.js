@@ -3,7 +3,6 @@ const ffmpeg = require('fluent-ffmpeg');
 
 
 module.exports = async (req, res) => {
-  try {
     let { youtubeUrl } = req.body;
 
     if (!youtubeUrl || !ytdl.validateURL(youtubeUrl)) {
@@ -13,13 +12,7 @@ module.exports = async (req, res) => {
     let mp3Url = await convertYoutubeToMp3(youtubeUrl); 
 
     return res.status(201).json({ message: 'MP3 URL created successfully', mp3Url: mp3Url });
-  } 
   
-  catch (error) 
-  {
-    console.error('Error:', error);
-    return res.status(500).json({ error: 'Server error' });
-  }
 };
 
 
