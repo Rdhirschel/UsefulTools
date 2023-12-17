@@ -36,6 +36,7 @@
         function speakText() {
             let text = document.getElementById('saying').value;
             let url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' + encodeURIComponent(text) + '&tl=en';
+            wait(2);
             let ttsResult = document.getElementById('ttsResult');
             ttsResult.src = url;
             ttsResult.parentElement.load();
