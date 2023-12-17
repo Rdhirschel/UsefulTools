@@ -33,12 +33,33 @@
       </div>
 
       <script>
+        const ServerUrl = 'https://toolzz.vercel.app';
+
         async function speakText() {
-            let text = document.getElementById('saying').value;
+            let userText = document.getElementById('saying').value;
             let url = 'http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' + encodeURIComponent(text) + '&tl=en';
-            let ttsResult = document.getElementById('ttsResult');
-            ttsResult.src = url;
-            ttsResult.parentElement.load();
+            const response = await fetch(`${ServerUrl}/api/speak`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text:userText
+                }),
+            });
+
+            if (response.ok) 
+            {
+                const result = await response.json();
+                shortUrl = result.shortUrl;
+            } 
+            else 
+            {
+                alert("HTTP-Error: " + response.status);            }
+            }
+            // let ttsResult = document.getElementById('ttsResult');
+            // ttsResult.src = url;
+            // ttsResult.parentElement.load();
         }
         </script>
 

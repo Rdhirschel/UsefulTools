@@ -11,6 +11,7 @@
         "fluent-ffmpeg": "^2.1.2",
         "fs": "^0.0.1-security",
         "mongodb": "^3.7.3",
-        "ytdl-core": "^4.11.5"
+        "child_process": "^1.0.2",
+        
     }
 }
