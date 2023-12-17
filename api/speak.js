@@ -20,12 +20,12 @@ async function connectToDatabase()
 }
 
 module.exports = async (req, res) => {
-    let {text} = req.query.body;
-
     try {
-        await mongoClient.connect();
+        const mongoClient = await connectToDatabase();
         const db = mongoClient.db('textToSpeech');
         const collection = db.collection('audioFiles');
+
+        let {text} = req.query.body;
 
         // Check if the audio file already exists
         const existingFile = await collection.findOne({ text: text });
