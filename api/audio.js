@@ -2,6 +2,7 @@ const express = require('express');
 const { exec } = require('child_process');
 const { MongoClient } = require('mongodb');
 const ffmpeg = require('fluent-ffmpeg');
+ffmpeg.setFfmpegPath('../ffmpeg')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -39,7 +40,7 @@ app.post('/api/audio', async (req, res) => {
       return res.status(446);
     }
 
-    const { textInput, inputFilePath, outputFormat } = req.body;
+    let { textInput, inputFilePath, outputFormat } = req.body;
 
     if (!textInput) {
       console.error('Text invalid or missing!');
@@ -55,26 +56,25 @@ app.post('/api/audio', async (req, res) => {
       return res.status(200).json({ message: 'File already exists in the database, downloading' });
     }
 
-    const outputFilePath = ServerUrl + '/audio/' + textInput + '.' + outputFormat;
+    const outputFilePath = '../audio/' + textInput + '.' + outputFormat;
 
-    return res.status(201);
+    ffmpeg('../audio/translate_tts.mp3')
+    .toFormat(outputFormat)
+    .on('error', (err) => {
+      console.log('Oh uh: ' + err.message);
+      return res.status(400).json({ error: err.message });
+    })
+    .on('progress', (progress) => {
+      console.log(progress.targetSize + ' KB converted');
+    })
+    .on('end', () => {
+        console.log('Conversion finished. May download.');
+    })
+    .save(outputFilePath);
 
-    // const process = new ffmpeg(inputFilePath);
-    // process.then((audio) => {
-    //   audio
-    //     .setAudioFormat(outputFormat)
-    //     .save(outputFilePath, (error) => {
-    //       if (error) {
-    //         console.error('Error:', error);
-    //         return res.status(449).json({ error: 'Server error' });
-    //       }
-    //       // Save the audio file in the database
-    //       collection.insertOne({ text: textInput, path: outputFilePath });
-    //       res.download(outputFilePath);
-    //       return res.status(201).json({ message: 'Audio file converted successfully', path: outputFilePath });
-    //     });
+    await collection.insertOne({ text: textInput, path: outputFilePath });
 
-    // });
+    return res.status(201).json({ message: 'File created successfully', path: outputFilePath });
 
   } catch (error) {
     console.error('Error connecting to the database: ${error}');
