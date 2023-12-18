@@ -21,19 +21,23 @@ module.exports = async (req, res) => {
 
         let { textInput } = req.query.body;
 
+        console.log('the text is', textInput);
+
 
         if(!textInput) 
         {
+            console.error('Text invalid or missing!');
             return res.status(400).json({ error: 'Missing textInput in the request body' });
         }
 
         // Check if the audio file already exists
         const existingFile = await collection.findOne({ text: textInput });
         if (existingFile) {
+          console.log('File already exists in the database, downloading');
             return res.download(existingFile.path);
         }
 
-        const path = `audioFiles/${textInput.replace(/\s+/g, '_')}.mp3`;
+        const path = `audio/${textInput.replace(/\s+/g, '_')}.mp3`;
         exec(`espeak -w ${path} "${textInput}"`, (error) => {
             if (error) {
                 console.error('Error:', error, 'oopsie1');
