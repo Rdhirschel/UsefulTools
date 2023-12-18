@@ -11,8 +11,8 @@
     
     <body>
       <div class="header">
-        <h1><u>TTS</u></h1>
-        <p>Text To Speech!</p>
+        <h1><u>Audio Format Convertor</u></h1>
+        <p>Converts one audio file to another.</p>
       </div>
 
       <div class="sidenav">
@@ -24,15 +24,17 @@
 
 
       <div class="card2">
-        <input type="text" id="saying" name="saying" placeholder="The slow white dog runs over the hyped fox.">
-        <button type="button" onclick="speakText()">Speak Up</button>
-        <audio controls id="acontr">
-            <source id="ttsResult" src=".."  type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+        <input type="file" id="fileInput" accept=".m4a, .mp3, .wav, audio/*">
+        <select id="formatSelect">
+          <option value="mp3">MP3</option>
+          <option value="wav">WAV</option>
+          <option value="ogg">OGG</option>
+          <option value="flac">FLAC</option>
+        </select>
+        <button type="button" onclick="convertAudio()">Convert</button>
       </div>
 
-      <script src="../scripts/tts.js"></script>
+      <script src="../scripts/audioconvert.js"></script>
 
 
     </body>
