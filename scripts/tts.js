@@ -8,7 +8,7 @@ async function speakText() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            textInput:userText
+            textInput: userText
         }),
     });
 
@@ -17,7 +17,8 @@ async function speakText() {
         const result = await response.json();
     } 
     else {
-        alert("HTTP-Error: " + response.status);    
+        const errorMessage = await response.text();
+        alert("HTTP-Error: " + response.errorMessage);    
     }
     // let ttsResult = document.getElementById('ttsResult');
     // ttsResult.src = url;
