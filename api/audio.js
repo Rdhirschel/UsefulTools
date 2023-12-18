@@ -23,6 +23,11 @@ app.use(express.json());
 app.post('/api/audio', async (req, res) => {
   try {
     const mongoClient = await connectToDatabase();
+    if(!mongoClient)
+    {
+      console.error('Error connecting to the database');
+      return res.status(447);
+    }
     const db = mongoClient.db('ConversionTool');
     if (!db) {
       console.error('Error connecting to the database');
@@ -52,31 +57,30 @@ app.post('/api/audio', async (req, res) => {
 
     const outputFilePath = ServerUrl + '/audio/' + textInput + '.' + outputFormat;
 
-    const process = new ffmpeg(inputFilePath);
-    process.then((audio) => {
-      audio
-        .setAudioFormat(outputFormat)
-        .save(outputFilePath, (error) => {
-          if (error) {
-            console.error('Error:', error);
-            return res.status(449).json({ error: 'Server error' });
-          }
-          // Save the audio file in the database
-          collection.insertOne({ text: textInput, path: outputFilePath });
-          res.download(outputFilePath);
-          return res.status(201).json({ message: 'Audio file converted successfully', path: outputFilePath });
-        });
+    return res.status(201);
 
-    }).catch((error) => {
-      console.error('Error:', error);
-      return res.status(449).json({ error: 'Server error' });
-    });
+    // const process = new ffmpeg(inputFilePath);
+    // process.then((audio) => {
+    //   audio
+    //     .setAudioFormat(outputFormat)
+    //     .save(outputFilePath, (error) => {
+    //       if (error) {
+    //         console.error('Error:', error);
+    //         return res.status(449).json({ error: 'Server error' });
+    //       }
+    //       // Save the audio file in the database
+    //       collection.insertOne({ text: textInput, path: outputFilePath });
+    //       res.download(outputFilePath);
+    //       return res.status(201).json({ message: 'Audio file converted successfully', path: outputFilePath });
+    //     });
+
+    // });
 
   } catch (error) {
-    console.error('Error connecting to the database:', error);
+    console.error('Error connecting to the database: ${error}');
     res.status(448).json({ error: error });
   }
-  
+
 });
 
 app.listen(port, () => {
