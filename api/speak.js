@@ -13,6 +13,9 @@ async function connectToDatabase() {
     return mongoClient;
   }
 }
+
+const ServerUrl = 'https://toolzz.vercel.app';
+
 module.exports = async (req, res) => {
     try {
         const mongoClient = await connectToDatabase();
@@ -42,13 +45,14 @@ module.exports = async (req, res) => {
 
         // Check if the audio file already exists
         const existingFile = await collection.findOne({ text: textInput });
+        
         if (existingFile) {
           console.log('File already exists in the database, downloading');
             res.download(existingFile.path);
             return res.status(200).json({ message: 'File already exists in the database, downloading' });
         }
 
-        const path = `audio/${textInput.replace(/\s+/g, '_')}.mp3`;
+        const path = ServerUrl + '/audio/${textInput.replace(/\s+/g, '_')}.mp3`;
         exec(`espeak -w ${path} "${textInput}"`, (error) => {
             if (error) {
                 console.error('Error:', error, 'oopsie1');
