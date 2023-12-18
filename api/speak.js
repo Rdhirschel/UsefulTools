@@ -1,5 +1,4 @@
 const { exec } = require('child_process');
-const fs = require('fs').promises;
 const { MongoClient } = require('mongodb');
 
 let mongoClient;
@@ -22,6 +21,12 @@ module.exports = async (req, res) => {
 
         let { textInput } = req.query.body;
 
+
+        if(!textInput) 
+        {
+            return res.status(400).json({ error: 'Missing textInput in the request body' });
+        }
+
         // Check if the audio file already exists
         const existingFile = await collection.findOne({ text: textInput });
         if (existingFile) {
@@ -36,7 +41,7 @@ module.exports = async (req, res) => {
             }
             // Save the audio file in the database
             collection.insertOne({ text: textInput, path: path });
-            res.download(path);
+            return res.download(path);
 
         });
     } catch (error) {
