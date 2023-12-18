@@ -17,7 +17,17 @@ module.exports = async (req, res) => {
     try {
         const mongoClient = await connectToDatabase();
         const db = mongoClient.db('textToSpeech');
+        if(!db)
+        {
+            console.error('Error connecting to the database');
+            return res.status(447);
+        }
         const collection = db.collection('audioFiles');
+        if(!collection)
+        {
+            console.error('Error connecting to the database collection');
+            return res.status(446);
+        }
 
         let { textInput } = req.query.body;
 
