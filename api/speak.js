@@ -34,7 +34,8 @@ module.exports = async (req, res) => {
         const existingFile = await collection.findOne({ text: textInput });
         if (existingFile) {
           console.log('File already exists in the database, downloading');
-            return res.download(existingFile.path);
+            res.download(existingFile.path);
+            return res.status(200).json({ message: 'File already exists in the database, downloading' });
         }
 
         const path = `audio/${textInput.replace(/\s+/g, '_')}.mp3`;
@@ -45,11 +46,12 @@ module.exports = async (req, res) => {
             }
             // Save the audio file in the database
             collection.insertOne({ text: textInput, path: path });
-            return res.download(path);
+            res.download(path);
+            return res.status(201).json({ message: 'Audio file created successfully', path: path });
 
         });
     } catch (error) {
-        console.error('Error:', error, 'oopsie2');
-        res.status(448).json({ error: 'Server error 2' });
+      console.error('Error connecting to the database:', error);
+      res.status(448).json({ error: error });
     }
 };
