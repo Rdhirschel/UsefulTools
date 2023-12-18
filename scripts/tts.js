@@ -17,7 +17,7 @@ async function speakText() {
         const result = await response.json();
     } 
     else {
-        const errorMessage = await response.text();
+        const errorMessage = await response.error();
         alert("HTTP-Error: " + response.errorMessage);    
     }
     // let ttsResult = document.getElementById('ttsResult');
