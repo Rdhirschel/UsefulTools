@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
             return res.status(200).json({ message: 'File already exists in the database, downloading' });
         }
 
-        const path = ServerUrl + '/audio/${textInput.replace(/\s+/g, '_')}.mp3`;
+        const path = ServerUrl + '/audio/' + textInput.replace(/\s+/g, '_') + '.mp3';
         exec(`espeak -w ${path} "${textInput}"`, (error) => {
             if (error) {
                 console.error('Error:', error, 'oopsie1');
