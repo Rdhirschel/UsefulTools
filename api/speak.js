@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
         exec(`espeak -w ${path} "${textInput}"`, (error) => {
             if (error) {
                 console.error('Error:', error, 'oopsie1');
-                return res.status(500).json({ error: 'Server error' });
+                return res.status(500).json({ error: 'Server error 1' });
             }
             // Save the audio file in the database
             collection.insertOne({ text: textInput, path: path });
@@ -41,6 +41,6 @@ module.exports = async (req, res) => {
         });
     } catch (error) {
         console.error('Error:', error, 'oopsie2');
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ error: 'Server error 2' });
     }
 };
