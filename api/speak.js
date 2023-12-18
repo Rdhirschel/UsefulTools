@@ -52,7 +52,7 @@ app.post('/api/speak', async (req, res) => {
     }
 
     const path = ServerUrl + '/audio/' + textInput.replace(/\s+/g, '_') + '.mp3';
-    exec(`espeak -w ${path} "${textInput}"`, (error) => {
+    exec(`espeak --path="${path}" "${textInput}"`, (error) => {
       if (error) {
         console.error('Error:', error, 'oopsie1');
         return res.status(449).json({ error: 'Server error 1' });
