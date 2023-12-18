@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
         const path = `audioFiles/${textInput.replace(/\s+/g, '_')}.mp3`;
         exec(`espeak -w ${path} "${textInput}"`, (error) => {
             if (error) {
-                console.error('Error:', error);
+                console.error('Error:', error, 'oopsie1');
                 return res.status(500).json({ error: 'Server error' });
             }
             // Save the audio file in the database
@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
 
         });
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:', error, 'oopsie2');
         res.status(500).json({ error: 'Server error' });
     }
 };
