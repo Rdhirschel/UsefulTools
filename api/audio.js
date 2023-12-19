@@ -3,6 +3,8 @@ const { exec } = require('child_process');
 const { MongoClient } = require('mongodb');
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegPath = require('ffmpeg-static');
+const os = require('os');
+const path = require('path');
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
@@ -58,7 +60,10 @@ app.post('/api/audio', async (req, res) => {
       return res.status(200).json({ message: 'File already exists in the database, downloading' });
     }
 
-    const outputFilePath = '../audio/' + textInput + '.' + outputFormat;
+    const tempDir = os.tmpdir();
+
+    // const outputFilePath = '../audio/' + textInput + '.' + outputFormat;
+    const outputFilePath = path.join(tempDir, textInput + '.' + outputFormat);
 
     ffmpeg('../audio/translate_tts.mp3')
     .toFormat(outputFormat)
@@ -73,6 +78,8 @@ app.post('/api/audio', async (req, res) => {
         console.log('Conversion finished. May download.');
     })
     .save(outputFilePath);
+
+    res.download(outputFilePath);
 
     await collection.insertOne({ text: textInput, path: outputFilePath });
 
