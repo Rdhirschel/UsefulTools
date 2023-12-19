@@ -1,7 +1,7 @@
 {
-    "name": "useful-tools",
+    "name": "your-project-name",
     "version": "1.0.0",
-    "description": "Useful Tools for personal use",
+    "description": "Your project description",
     "main": "index.js",
     "scripts": {
         "start": "node index.js"
@@ -13,6 +13,6 @@
         "mongodb": "^3.7.3",
         "child_process": "^1.0.2",
         "ytdl-core": "^4.9.1",
-        "ffmpeg": "^0.0.1"
+        "ffmpeg-static": "^4.4.0"
     }
 }
