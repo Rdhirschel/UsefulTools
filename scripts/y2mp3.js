@@ -14,8 +14,12 @@ async function validateAndSubmit()
 {
    var url = document.getElementById("url").value;
 
-   if (url == null || url == "" || !CheckIfValidYoutubeUrl(url)) {
+   if (url == null || url == "") {
       alert("Please Enter the Youtube Video URL");
+      return;
+   }
+   if (!CheckIfValidYoutubeUrl(url)) {
+      alert("Please Enter a Valid Youtube Video URL");
       return;
    }
 
