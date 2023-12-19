@@ -2,7 +2,9 @@ const express = require('express');
 const { exec } = require('child_process');
 const { MongoClient } = require('mongodb');
 const ffmpeg = require('fluent-ffmpeg');
-ffmpeg.setFfmpegPath('../ffmpeg')
+const ffmpegPath = require('ffmpeg-static');
+
+ffmpeg.setFfmpegPath(ffmpegPath);
 
 const app = express();
 const port = process.env.PORT || 3000;

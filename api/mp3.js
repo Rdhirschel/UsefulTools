@@ -1,5 +1,8 @@
 const ytdl = require('ytdl-core'); 
 const ffmpeg = require('fluent-ffmpeg');
+const ffmpegPath = require('ffmpeg-static');
+
+ffmpeg.setFfmpegPath(ffmpegPath);
 
 module.exports = async (req, res) => {
     let { youtubeUrl } = req.body;
