@@ -8,14 +8,14 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 module.exports = async (req, res) => {
     let { youtubeUrl } = req.body;
-    console.log("b4 tempdir");
     const tempDir = os.tmpdir();
-    console.log("after tempdir");
+
     if (!youtubeUrl || !ytdl.validateURL(youtubeUrl)) {
       return res.status(400).json({ error: 'Invalid or missing YouTube URL in the request body' });
     }
-
-    let mp3Url = await convertYoutubeToMp3(youtubeUrl, tempDir); 
+    console.log("passed validation");
+    let mp3Url = await convertYoutubeToMp3(youtubeUrl, tempDir);
+    console.log("converted to mp3");
 
     return res.status(201).json({ message: 'MP3 URL created successfully', mp3Url: mp3Url });
   
@@ -26,11 +26,8 @@ async function convertYoutubeToMp3(url, tempDir) {
   return new Promise((resolve, reject) => {
     const stream = ytdl(url, { quality: 'highestaudio' });
     const output = path.join(tempDir, `${Date.now()}.mp3`);
-
-    ffmpeg(stream)
-      .audioBitrate(128)
-      .save(output)
-      .on('end', () => resolve(output))
-      .on('error', reject);
+    console.log("stream is the problem");
+    ffmpeg(stream).audioBitrate(128).save(output).on('end', () => resolve(output)).on('error', reject);
   });
 }
+
