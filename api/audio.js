@@ -56,7 +56,13 @@ app.post('/api/audio', async (req, res) => {
 
     if (existingFile) {
       console.log('File already exists in the database, downloading');
-      res.download(existingFile.path);
+      res.download(existingFile.path, (err) => {
+        if (err) {
+          console.error('Error downloading file: ' + err);
+          return res.status(401).json({ error: err });
+        }
+        console.log('File downloaded successfully');
+      });
       return res.status(200).json({ message: 'File already exists in the database, downloading' });
     }
 
