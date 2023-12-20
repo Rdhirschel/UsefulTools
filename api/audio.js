@@ -87,8 +87,6 @@ app.post('/api/audio', async (req, res) => {
 
     res.download(outputFilePath);
 
-    await collection.insertOne({ text: textInput, path: outputFilePath });
-
     return res.status(201).json({ message: 'File created successfully', path: outputFilePath });
 
   } catch (error) {
