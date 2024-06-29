@@ -6,6 +6,18 @@
     box-sizing: border-box;
 }
 
+.unclickable-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: not-allowed;
+    display: inline-block;
+
+    opacity: 0.6;
+  }
+  .unclickable-link:hover {
+    color: darkblue;
+  }
+
 .header{
     text-align: center;
     margin-left: 20%;
