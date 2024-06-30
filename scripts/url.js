@@ -48,7 +48,7 @@ async function shortenURL()
     else 
     {
         const errorMessage = await response.text();
-        document.getElementById("result").value = errorMessage;
+        document.getElementById("result").value = errorMessage.error;
     }
 }
 
