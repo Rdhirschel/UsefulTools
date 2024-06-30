@@ -23,6 +23,10 @@ module.exports = async (req, res) => {
     }
 
     let existingMapping;
+    const urlMapping = await mongoClient.db('urlshortener').collection('urlMappings').findOne({ original: originalUrl});
+    if (urlMapping) {
+      return res.status(200).json({ message: 'Short URL already exists', shortUrl: urlMapping.short });
+    }
     if (!shortUrl) 
     {
       do 
